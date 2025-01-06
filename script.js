@@ -256,7 +256,7 @@ function Connect4Game() {
     function updateGameTurnDisplay(){
         const gameTurn = document.getElementById("connect_4_turn")
         const currentPlayer = getCurrentPlayer()
-        gameTurn.textContent = currentPlayer === 1 ? `${player_1} Turn` : `Player ${player_2} Turn`
+        gameTurn.textContent = currentPlayer === 1 ? `${player_1} Turn` : `${player_2} Turn`
     }
 
     this.showResults = (result)=>{
