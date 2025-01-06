@@ -8,7 +8,7 @@ window.onload = ()=>{
     const startButton = document.getElementById("startButton")
     startButton.addEventListener("click", ()=>{
         game.start()
-    });
+    })
     const restartButton = document.getElementById("restartButton")
     restartButton.addEventListener("click", ()=>{
         game.restart()
@@ -20,7 +20,7 @@ function Connect4Game() {
 
     let rows = 6
     let columns = 7
-    let board = Array.from({ length: rows }, () => Array(columns).fill(0)); // Initialize the board
+    let board = Array.from({ length: rows }, () => Array(columns).fill(0)) // Initialize the board
     let player_1 = "Player 1"
     let player_2 = "Player 2"
     let turn = 2
@@ -91,7 +91,7 @@ function Connect4Game() {
                         })
                     })
                     self.displayBoard(tempBoard)
-                }, i * speed) // Adjust delay (500ms per step)
+                }, i * speed)
             }
         
             // Finally, update the actual board state
@@ -110,19 +110,19 @@ function Connect4Game() {
     this.displayBoard = (matrix, array = [])=>{        
         for (let row = 0; row < matrix.length; row++) {
             for (let col = 0; col < matrix[row].length; col++) {
-                const cell = document.querySelector(`.connect_4_cell[data-row="${row}"][data-column="${col}"]`);
+                const cell = document.querySelector(`.connect_4_cell[data-row="${row}"][data-column="${col}"]`)
                 if (cell) {
-                    cell.classList.remove('player1', 'player2', 'winner');
+                    cell.classList.remove('player1', 'player2', 'winner')
     
                     if (matrix[row][col] === 1) {
-                        cell.classList.add('player1');
+                        cell.classList.add('player1')
                     } else if (matrix[row][col] === 2) {
-                        cell.classList.add('player2');
+                        cell.classList.add('player2')
                     }
     
                     // If array is not empty, add 'winner' class to the winning cells
                     if (array.some(([winRow, winCol]) => winRow === row && winCol === col)) {
-                        cell.classList.add('winner');
+                        cell.classList.add('winner')
                     }
                 }
             }
@@ -132,7 +132,7 @@ function Connect4Game() {
     this.checkGameEnd = ()=>{
         // Check if a player has won
         const checkWinner = (player) => {
-            let winningCells = [];
+            let winningCells = []
     
             // Check horizontal wins
             for (let row = 0; row < rows; row++) {
@@ -148,8 +148,8 @@ function Connect4Game() {
                             [row, col + 1],
                             [row, col + 2],
                             [row, col + 3]
-                        ];
-                        return winningCells;
+                        ]
+                        return winningCells
                     }
                 }
             }
@@ -168,8 +168,8 @@ function Connect4Game() {
                             [row + 1, col],
                             [row + 2, col],
                             [row + 3, col]
-                        ];
-                        return winningCells;
+                        ]
+                        return winningCells
                     }
                 }
             }
@@ -188,8 +188,8 @@ function Connect4Game() {
                             [row + 1, col + 1],
                             [row + 2, col + 2],
                             [row + 3, col + 3]
-                        ];
-                        return winningCells;
+                        ]
+                        return winningCells
                     }
                 }
             }
@@ -208,43 +208,42 @@ function Connect4Game() {
                             [row + 1, col - 1],
                             [row + 2, col - 2],
                             [row + 3, col - 3]
-                        ];
-                        return winningCells;
+                        ]
+                        return winningCells
                     }
                 }
             }
     
-            return null;
-        };
+            return
+        }
     
         // Check if player 1 or player 2 has won
-        const player1WinningCells = checkWinner(1);
+        const player1WinningCells = checkWinner(1)
         if (player1WinningCells) {
             return {
                 winner: 'Player 1',
                 array: player1WinningCells
-            };
+            }
         }
     
-        const player2WinningCells = checkWinner(2);
+        const player2WinningCells = checkWinner(2)
         if (player2WinningCells) {
             return {
                 winner: 'Player 2',
                 array: player2WinningCells
-            };
+            }
         }
     
         // Check if the board is full
-        const isFull = board.every(row => row.every(cell => cell !== 0));
+        const isFull = board.every(row => row.every(cell => cell !== 0))
         if (isFull) {
             return {
                 winner: null,
                 array: []
-            };
+            }
         }
-    
-        // Game is not yet over
-        return null
+        
+        return // Game is not yet over
     }      
 
     function getCurrentPlayer(){
