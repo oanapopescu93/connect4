@@ -23,6 +23,7 @@ function Connect4Game() {
     let board = Array.from({ length: rows }, () => Array(columns).fill(0)); // Initialize the board
     let player_1 = "Player 1"
     let player_2 = "Player 2"
+    let turn = 2
     let speed = 50
     let gameStart = false
 
@@ -247,16 +248,13 @@ function Connect4Game() {
     }      
 
     function getCurrentPlayer(){
-        const flattened = board.flat()
-        const count1 = flattened.filter((value) => value === 1).length
-        const count2 = flattened.filter((value) => value === 2).length
-        return count1 <= count2 ? 1 : 2 // Player 1 starts first
+        return turn
     }
 
     function updateGameTurnDisplay(){
         const gameTurn = document.getElementById("connect_4_turn")
-        const currentPlayer = getCurrentPlayer()
-        gameTurn.textContent = currentPlayer === 1 ? `${player_1} Turn` : `${player_2} Turn`
+        turn = turn === 1 ? 2 : 1
+        gameTurn.textContent = turn === 1 ? `${player_1} Turn` : `${player_2} Turn`
     }
 
     this.showResults = (result)=>{
@@ -299,6 +297,8 @@ function Connect4Game() {
 
     this.restart = ()=>{
         gameStart = true
+        turn = 2
+        updateGameTurnDisplay()
         
         const restartButtonContainer = document.getElementById("restartButton_container")
         restartButtonContainer.style.display = "none"
